@@ -33,7 +33,7 @@ class Header extends Component {
   render() {
     var navbarcss={
       backgroundColor:'#e9ecf0'
-    }
+    };
     return(
       <nav className="navbar navbar-light" style={navbarcss}>
         <Link to="/" className="navbar-brand">Info-Keeper</Link>
