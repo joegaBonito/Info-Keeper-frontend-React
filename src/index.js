@@ -8,9 +8,11 @@ import reducers from './reducers';
 import registerServiceWorker from './registerServiceWorker';
 
 import {AUTH_USER} from './actions/auth_types';
-import asyncComponent from './components/AsyncComponent';
+import RequireAuth from './components/auth/require_auth';
+import asyncComponent from './AsyncComponent';
 
-const AsyncIndex = asyncComponent(() => import('./components/index').then(module=>module.default))
+const AsyncHeader = asyncComponent(() => import('./components/header').then(module=>module.default))
+const AsynIndex = asyncComponent(() => import('./components/index').then(module=>module.default))
 const AsyncShowinfo = asyncComponent(() => import('./components/showinfo').then(module => module.default))
 const AsyncShowinfoLists = asyncComponent(() => import('./components/showinfolists').then(module => module.default))
 const AsyncCreateinfo = asyncComponent(() => import('./components/createinfo').then(module => module.default))
@@ -18,9 +20,7 @@ const AsyncUpdateinfo = asyncComponent(() => import('./components/updateinfo').t
 const AsyncSignin = asyncComponent(() => import('./components/auth/signin').then(module => module.default))
 const AsyncSignout = asyncComponent(() => import('./components/auth/signout').then(module => module.default))
 const AsyncSignup = asyncComponent(() => import('./components/auth/signup').then(module => module.default))
-const AsyncHeader = asyncComponent(() => import('./components/header').then(module => module.default))
 const AsyncNotFoundPage = asyncComponent(() => import('./components/not-found-page').then(module => module.default))
-const AsyncRequireAuth = asyncComponent(() => import('./components/auth/require_auth').then(module => module.default))
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
@@ -33,11 +33,11 @@ if(token) {
 }
 ReactDOM.render(
   <Provider store={store}>
-  <BrowserRouter >
+  <BrowserRouter>
     <div>
-    <Route component={Header}/>
+    <Route component={AsyncHeader}/>
       <Switch>
-          <Route exact path="/" component={AsyncIndex}/>
+          <Route exact path="/" component={AsynIndex}/>
           <Route exact path="/signin" component={AsyncSignin}/>
           <Route exact path="/signout" component={AsyncSignout}/>
           <Route exact path="/signup" component={AsyncSignup}/>

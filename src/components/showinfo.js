@@ -8,6 +8,7 @@ class Showinfo extends Component {
 
   componentDidMount() {
     const {id} = this.props.match.params;
+    console.log(id);
     this.props.fetchPost(id);
   }
   onDeleteClick() {
@@ -15,7 +16,12 @@ class Showinfo extends Component {
     this.props.deletePost(id, () => this.props.history.push('/showinfolists'));
   }
   render() {
+
     const {post} = this.props;
+
+    if(!post) {
+      return <div>loading...</div>
+    }
 
     return (
       <div>

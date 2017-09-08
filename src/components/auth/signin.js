@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import {Fields, reduxForm } from 'redux-form';
-import {signinUser,authError} from '../../actions/index';
+import {signinUser,authError,} from '../../actions/index';
 import {connect} from 'react-redux';
 
 class Signin extends Component {
+
+  componentWillMount() {
+    if(this.props.authenticated) {
+      this.props.history.push('/');
+    }
+  }
+
   handleFormSubmit({username, password }) {
     // Need to do something to log user in
     this.props.signinUser({username, password },()=>this.props.history.push('/'));
@@ -33,7 +40,7 @@ class Signin extends Component {
 }
 
 function mapStateToProps(state) {
-  return { errorMessage: state.auth.error };
+  return { errorMessage: state.auth.error, authenticated: state.auth.authenticated };
 }
 
 const renderFields = (fields) => {

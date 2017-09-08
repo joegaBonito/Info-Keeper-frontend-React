@@ -4,6 +4,12 @@ import {connect} from 'react-redux';
 import {signupUser,authError} from '../../actions/index';
 
 class SignUp extends Component {
+  componentWillMount() {
+    if(this.props.authenticated) {
+      this.props.history.push('/');
+    }
+  }
+
   handleFormSubmit(formProps) {
     //Call action creator to sign up the user!
     this.props.signupUser(formProps,()=>this.props.history.push('/'));
@@ -82,7 +88,7 @@ const renderFields = (fields) => {
 };
 
 function mapStateToProps(state) {
-  return { errorMessage: state.auth.error };
+  return { errorMessage: state.auth.error, authenticated: state.auth.authenticated };
 }
 
 export default reduxForm({
