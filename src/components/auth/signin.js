@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Fields, reduxForm } from 'redux-form';
-import {signinUser,authError,} from '../../actions/index';
+import {signinUser,authError,errorMsgReset} from '../../actions/index';
 import {connect} from 'react-redux';
 
 class Signin extends Component {
@@ -9,6 +9,7 @@ class Signin extends Component {
     if(this.props.authenticated) {
       this.props.history.push('/');
     }
+    this.props.errorMsgReset();
   }
 
   handleFormSubmit({username, password }) {
@@ -64,4 +65,4 @@ const renderFields = (fields) => {
 }
 export default reduxForm({
   form: 'signin'
-})(connect(mapStateToProps, {signinUser,authError})(Signin));
+})(connect(mapStateToProps, {signinUser,authError,errorMsgReset})(Signin));

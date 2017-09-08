@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import {Fields, reduxForm } from 'redux-form';
 import {connect} from 'react-redux';
-import {signupUser,authError} from '../../actions/index';
+import {signupUser,authError,errorMsgReset} from '../../actions/index';
 
 class SignUp extends Component {
   componentWillMount() {
     if(this.props.authenticated) {
       this.props.history.push('/');
     }
+    this.props.errorMsgReset();
   }
 
   handleFormSubmit(formProps) {
@@ -94,4 +95,4 @@ function mapStateToProps(state) {
 export default reduxForm({
   validate,
   form: 'signup',
-})(connect(mapStateToProps, {signupUser,authError})(SignUp));
+})(connect(mapStateToProps, {signupUser,authError,errorMsgReset})(SignUp));

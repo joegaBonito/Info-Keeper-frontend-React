@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_MESSAGE} from './auth_types';
+import {AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_MESSAGE,ERROR_MSG_RESET} from './auth_types';
 
 const ROOT_URL = `http://localhost:3175`;
 
@@ -54,6 +54,13 @@ export function authError(error) {
   return {
     type:AUTH_ERROR,
     payload: error
+  };
+}
+
+export function errorMsgReset() {
+  return {
+    type:ERROR_MSG_RESET,
+    payload: ''
   };
 }
 
