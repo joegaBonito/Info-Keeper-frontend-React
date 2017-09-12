@@ -23,6 +23,25 @@ class Updateinfo extends Component {
       </div>
     );
   }
+  renderFieldTextArea(field) {
+    return(
+      <div className="form-group has-danger">
+        <label>{field.label}</label>
+        <textarea className="form-control" type="text" placeholder={field.placeholder} {...field.input} />
+        <div className="text-help">
+          {field.meta.touched ? field.meta.error : ''}
+        </div>
+      </div>
+    );
+  }
+  renderFieldFileUpload(field) {
+    return (
+      <div className="form-group has-danger">
+        <label>{field.label}</label>
+        <input type="file" className="form-control" {...field.input} />
+      </div>
+    );
+  }
 
   onSubmit(values) {
     const {id} = this.props.match.params;
@@ -43,7 +62,8 @@ class Updateinfo extends Component {
             <Field label="Source" name="source" placeholder={post.source} component={this.renderField} />
             <Field label="Id" name="infoId" placeholder={post.infoId} component={this.renderField} />
             <Field label="Password" name="infoPassword" placeholder={post.infoPassword} component={this.renderField} />
-            <Field label="Key Notes" name="keyNotes" placeholder={post.keyNotes} component={this.renderField} />
+            <Field label="Key Notes" name="keyNotes" placeholder={post.keyNotes} component={this.renderFieldTextArea} />
+            <Field label="File Upload" name ="fileData" component={this.renderFieldFileUpload}  />
           <button type="submit" className="btn btn-primary">Save</button>
           <Link to="/showinfolists" className="btn btn-danger">Cancel</Link>
         </form>
@@ -62,6 +82,9 @@ function validate(values) {
   }
   if(!values.infoPassword) {
     errors.infoPassword="Enter Password!";
+  }
+  if(!values.keyNotes) {
+    errors.keyNotes="Enter Key Notes!";
   }
 
   //If errors is empty, the form is fine to submit
