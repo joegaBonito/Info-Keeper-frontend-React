@@ -15,6 +15,7 @@ class Showinfo extends Component {
     const {id} = this.props.match.params; //Checks if it matches the id.
     this.props.deletePost(id, () => this.props.history.push('/showinfolists'));
   }
+
   render() {
 
     const {post} = this.props;
@@ -38,8 +39,12 @@ class Showinfo extends Component {
           <Row className="show-grid">
             <Col xs={12} md={8}>KEY NOTES: <span>{post.keyNotes}</span></Col>
           </Row>
+          <Row className="show-grid">
+            <Col xs={12} md={8}>Image:  <img width="200px" height="200px" src={`data:image/jpeg;base64,${post.fileData}`} /></Col>
+          </Row>
         </Grid>
         <div className = "text-xs-right">
+        <br/>
         <Link to="/showinfolists" ><button className="btn btn-primary">Back to List</button></Link>
         <Link className="btn btn-primary" to={`/updateinfo/${post.id}`}>
             Update Post
@@ -52,9 +57,10 @@ class Showinfo extends Component {
   }
 }
 
-function mapStateToProps({posts},ownProps){
+function mapStateToProps(state,ownProps){
   return {
-      post:posts[ownProps.match.params.id]
+      post:state.posts[ownProps.match.params.id],
+      image:state.posts.image
   };
 }
 

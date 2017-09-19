@@ -5,6 +5,13 @@ import {connect} from 'react-redux';
 import {createPost} from  '../actions/index';
 
 class Createinfo extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    file: '',
+    imagePreviewUrl: ''
+    };
+  }
    renderField = (field) => {
     return(
       <div className="form-group has-danger">
@@ -29,12 +36,9 @@ class Createinfo extends Component {
     );
   }
 
- renderFieldFileUpload = (field) => {
+  renderFileUpload = (field) => {
     return (
-      <div className="form-group has-danger">
-        <label>{field.label}</label>
-        <input className="form-control" type="file" {...field.input} />
-      </div>
+      <input type="file"  name="fileData"  accept="image/*" {...field.input} />
     );
   }
 
@@ -51,7 +55,8 @@ class Createinfo extends Component {
             <Field label="Id" name="infoId" component={this.renderField} />
             <Field label="Password" name="infoPassword" component={this.renderField} />
             <Field label="Key Notes" name="keyNotes" component={this.renderFieldTextArea}/>
-            <Field label="File Upload" name = "fileData" component={this.renderFieldFileUpload} />
+            <Field label="File Upload" name = "fileData" component={this.renderFileUpload}/>
+            <br/>
             <button type="submit" className="btn btn-primary">Submit</button>
             <Link to="/showinfolists" className="btn btn-danger">Cancel</Link>
             </form>
@@ -80,6 +85,7 @@ function validate(values) {
   //If errors has *any* properties, redux form assumes form is invalid
   return errors;
 }
+
 
 export default reduxForm({
   validate,

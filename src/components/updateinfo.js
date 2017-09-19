@@ -5,8 +5,13 @@ import {connect} from 'react-redux';
 import {fetchPost, updatePost} from '../actions/index';
 
 class Updateinfo extends Component {
-
-
+  constructor(props) {
+    super(props);
+    this.state = {
+    file: '',
+    imagePreviewUrl: ''
+    };
+  }
   componentWillMount() {
     const {id} = this.props.match.params; //Checks if it matches the id
     this.props.fetchPost(id);
@@ -34,19 +39,17 @@ class Updateinfo extends Component {
       </div>
     );
   }
-  renderFieldFileUpload(field) {
+
+  renderFileUpload(field) {
     return (
-      <div className="form-group has-danger">
-        <label>{field.label}</label>
-        <input type="file" className="form-control" {...field.input} />
-      </div>
+      <input type="file"  name="fileData"  accept="image/*" {...field.input} />
     );
   }
 
   onSubmit(values) {
     const {id} = this.props.match.params;
     this.props.updatePost(id,values, () => this.props.history.push('/showinfolists'));
-}
+  }
 
   render() {
     const {handleSubmit} = this.props;
@@ -63,7 +66,7 @@ class Updateinfo extends Component {
             <Field label="Id" name="infoId" placeholder={post.infoId} component={this.renderField} />
             <Field label="Password" name="infoPassword" placeholder={post.infoPassword} component={this.renderField} />
             <Field label="Key Notes" name="keyNotes" placeholder={post.keyNotes} component={this.renderFieldTextArea} />
-            <Field label="File Upload" name ="fileData" component={this.renderFieldFileUpload}  />
+            <Field label="File Upload" name ="fileData" component={this.renderFileUpload}  />
           <button type="submit" className="btn btn-primary">Save</button>
           <Link to="/showinfolists" className="btn btn-danger">Cancel</Link>
         </form>
