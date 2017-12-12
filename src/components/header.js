@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import {protectedTest}  from '../actions/index';
 
 class Header extends Component {
-  handleClick(e) {
+  handleClick = (e) => {
     e.preventDefault();
     this.props.protectedTest(()=>this.props.history.push('/showinfolists'))
   }
@@ -16,7 +16,7 @@ class Header extends Component {
         <Link className="nav-link" to="/signout">Sign Out</Link>
         </li>,
         <li className="nav-item" key={2}>
-          <Link className="nav-link" to="#" onClick={this.handleClick.bind(this)} >Show Info Lists</Link>
+          <Link className="nav-link" to="#" onClick={this.handleClick} >Show Info Lists</Link>
         </li>
     ];
     } else {

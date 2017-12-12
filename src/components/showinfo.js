@@ -40,7 +40,7 @@ class Showinfo extends Component {
             <Col xs={12} md={8}>KEY NOTES: <span>{post.keyNotes}</span></Col>
           </Row>
           <Row className="show-grid">
-            <Col xs={12} md={8}>Image:  <img width="200px" height="200px" src={`data:image/jpeg;base64,${post.fileData}`} /></Col>
+            <Col xs={12} md={8}>Image:  <img width="200px" height="200px" alt={post.infoId} src={`data:image/jpeg;base64,${post.fileData}`} /></Col>
           </Row>
         </Grid>
         <div className = "text-xs-right">
