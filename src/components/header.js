@@ -4,9 +4,16 @@ import {Link} from 'react-router-dom';
 import {protectedTest}  from '../actions/index';
 
 class Header extends Component {
+
+  componentWillMount() {
+    this.props.protectedTest;
+  }
+
   handleClick = (e) => {
     e.preventDefault();
-    this.props.protectedTest(()=>this.props.history.push('/showinfolists'))
+    this.props.protectedTest((res)=> {
+        this.props.history.push('/showinfolists')
+    });
   }
 
   renderLinks() {

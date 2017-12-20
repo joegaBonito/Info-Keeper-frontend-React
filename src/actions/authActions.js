@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_MESSAGE,ERROR_MSG_RESET} from './auth_types';
+import { push } from 'react-router-redux';
 
 const ROOT_URL = `http://localhost:3175`;
 
@@ -66,7 +67,7 @@ export function errorMsgReset() {
 
 export function fetchMessage() {
   return function(dispatch) {
-    axios.get(`${ROOT_URL}`, {headers:{authorization:localStorage.getItem('token')}})
+    axios.get(`${ROOT_URL}`, {headers:{Authorization: localStorage.getItem('token')}})
     .then(response =>{
     dispatch({
       type:FETCH_MESSAGE,
@@ -78,12 +79,13 @@ export function fetchMessage() {
 
 export function protectedTest(callback) {
   return function(dispatch) {
-    axios.get(`${ROOT_URL}/admin`,
-      {headers:{authorization:localStorage.getItem('token')}})
-    .then(response => {
+    axios.get(`${ROOT_URL}/refresh`,
+      {headers:{Authorization: localStorage.getItem('token')}})
+    .then(() => {
       callback();
-    }).catch(error => {
+    }).catch((error)=>{
       dispatch(authError("Not an Authorized User 403!!!"));
-    });
+    }
+    );
   };
 }
