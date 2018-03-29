@@ -25,7 +25,7 @@ class ShowinfoLists extends Component {
 
     return (
       <div>
-      <h3>Info-Keeper List</h3>
+      {/* <h3>Info-Keeper List</h3> */}
           <ul className="list-group">
             { this.renderPosts() }
           </ul>
