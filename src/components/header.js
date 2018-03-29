@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {protectedTest}  from '../actions/index';
+import './header.css';
 
 class Header extends Component {
 
-  componentWillMount() {
-    this.props.protectedTest;
-  }
+  // componentWillMount() {
+  //   this.props.protectedTest;
+  // }
 
   handleClick = (e) => {
     e.preventDefault();

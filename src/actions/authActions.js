@@ -1,6 +1,5 @@
 import axios from 'axios';
 import {AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_MESSAGE,ERROR_MSG_RESET} from './auth_types';
-import { push } from 'react-router-redux';
 
 const ROOT_URL = `http://localhost:3175`;
 

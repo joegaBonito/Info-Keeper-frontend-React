@@ -14,6 +14,7 @@ export default function(state = {}, action){
       return {...state, role: action.payload};
     case ERROR_MSG_RESET:
       return {...state, error: action.payload};
+    default: 
+      return state;
   }
-  return state;
 }
